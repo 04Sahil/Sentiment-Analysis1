@@ -1,16 +1,29 @@
-# Use Python 3.10
 FROM python:3.10-slim
 
-# Install system dependencies for OpenCV and audio
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
-    ffmpeg \
-    libgl1-mesa-glx \
-  && rm -rf /var/lib/apt/lists/*
+    build-essential \
+    cmake \
+    g++ \
+    wget \
+    git \
+    curl \
+    libgl1 \
+    libglib2.0-0 \
+    libxext6 \
+    libxrender-dev \
+    libsm6 \
+    && rm -rf /var/lib/apt/lists/*
 
+# Set work directory
 WORKDIR /app
-COPY requirements.txt ./
+
+# Install Python dependencies
+COPY requirements.txt .
 RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
+# Copy the application
 COPY . .
 
-CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8080"]
+# Run your FastAPI app (adjust if your entrypoint is different)
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]
