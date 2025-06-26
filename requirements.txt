@@ -1,7 +1,7 @@
-uvicorn[standard]
-fastapi
-numpy
-opencv-python
-mediapipe
-scipy
-deepface
+fastapi==0.115.13
+uvicorn[standard]==0.22.0
+deepface==0.0.91
+opencv-python==4.11.0.86
+mediapipe==0.10.3
+scipy==1.11.3
+numpy==1.25.2
